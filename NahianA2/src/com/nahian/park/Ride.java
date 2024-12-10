@@ -1,5 +1,6 @@
 package com.nahian.park;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -58,14 +59,14 @@ public class Ride implements RideInterface {
 
     @Override
     public void addVisitorToQueue(Visitor visitor) {
-        visitorQueue.add(visitor);  // Add to queue
+        visitorQueue.add(visitor);
         System.out.println(visitor.getName() + " added to the queue.");
     }
 
     @Override
     public void removeVisitorFromQueue() {
         if (!visitorQueue.isEmpty()) {
-            Visitor removedVisitor = visitorQueue.poll();  // Remove from queue
+            Visitor removedVisitor = visitorQueue.poll();
             System.out.println(removedVisitor.getName() + " removed from the queue.");
         } else {
             System.out.println("Queue is empty. No visitor to remove.");
@@ -86,12 +87,13 @@ public class Ride implements RideInterface {
 
     @Override
     public void runOneCycle() {
-        // Placeholder: Implementation in Part 5
+        // Placeholder for Part 5
     }
 
     @Override
     public void addVisitorToHistory(Visitor visitor) {
         rideHistory.add(visitor);
+        System.out.println(visitor.getName() + " added to the ride history.");
     }
 
     @Override
@@ -107,8 +109,10 @@ public class Ride implements RideInterface {
     @Override
     public void printRideHistory() {
         System.out.println("Visitors who took the ride:");
-        for (Visitor visitor : rideHistory) {
-            System.out.println(visitor.getName());
+        Iterator<Visitor> iterator = rideHistory.iterator();
+        while (iterator.hasNext()) {
+            Visitor visitor = iterator.next();
+            System.out.println(" - " + visitor.getName());
         }
     }
 }
