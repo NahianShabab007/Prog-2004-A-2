@@ -11,6 +11,8 @@ public class Ride implements RideInterface {
 
     private Queue<Visitor> visitorQueue;          // Queue for visitors
     private LinkedList<Visitor> rideHistory;      // History of visitors who took the ride
+    private int maxRider;                         // Maximum riders per cycle
+    private int numOfCycles;                      // Number of cycles the ride has run
 
     // Default constructor
     public Ride() {
@@ -19,15 +21,19 @@ public class Ride implements RideInterface {
         this.operator = null;
         this.visitorQueue = new LinkedList<>();
         this.rideHistory = new LinkedList<>();
+        this.maxRider = 1;
+        this.numOfCycles = 0;
     }
 
     // Parameterized constructor
-    public Ride(String rideName, int capacity, Employee operator) {
+    public Ride(String rideName, int capacity, Employee operator, int maxRider) {
         this.rideName = rideName;
         this.capacity = capacity;
         this.operator = operator;
         this.visitorQueue = new LinkedList<>();
         this.rideHistory = new LinkedList<>();
+        this.maxRider = Math.max(1, maxRider); // Ensure at least 1 rider per cycle
+        this.numOfCycles = 0;
     }
 
     // Getters and setters
@@ -53,6 +59,17 @@ public class Ride implements RideInterface {
 
     public void setOperator(Employee operator) {
         this.operator = operator;
+    }
+    public int getMaxRider() {
+        return maxRider;
+    }
+
+    public void setMaxRider(int maxRider) {
+        this.maxRider = Math.max(1, maxRider);
+    }
+
+    public int getNumOfCycles() {
+        return numOfCycles;
     }
 
     // Implementing RideInterface methods
@@ -87,7 +104,27 @@ public class Ride implements RideInterface {
 
     @Override
     public void runOneCycle() {
-        // Placeholder for Part 5
+        if (operator == null) {
+            System.out.println("The ride cannot run without an operator.");
+            return;
+        }
+
+        if (visitorQueue.isEmpty()) {
+            System.out.println("The queue is empty. No visitors to ride.");
+            return;
+        }
+
+        System.out.println("Running one cycle of the ride...");
+
+        int riders = 0;
+        while (!visitorQueue.isEmpty() && riders < maxRider) {
+            Visitor visitor = visitorQueue.poll();
+            addVisitorToHistory(visitor);
+            riders++;
+        }
+
+        numOfCycles++;
+        System.out.println(riders + " visitors took the ride this cycle.");
     }
 
     @Override

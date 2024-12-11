@@ -7,12 +7,14 @@ public class AssignmentTwo {
         assignment.partFourA();
         System.out.println("\nPart 4b:");
         assignment.partFourB();
+        System.out.println("\nPart 5:");
+        assignment.partFive();
     }
     public void partThree() {
     	System.out.println("Part 3:");
         // Create a new Ride object
         Employee operator = new Employee("John Doe", 30, "E001", "Operator", "9 AM - 5 PM");
-        Ride rollerCoaster = new Ride("Roller Coaster", 20, operator);
+        Ride rollerCoaster = new Ride("Roller Coaster", 20, operator,1);
 
         // Create Visitor objects
         Visitor v1 = new Visitor("Alice", 25, "V001", "Premium", "2024-12-01");
@@ -44,7 +46,7 @@ public class AssignmentTwo {
     	System.out.println("\nPart 4:");
         // Create a new Ride object
         Employee operator = new Employee("John Doe", 30, "E001", "Operator", "9 AM - 5 PM");
-        Ride rollerCoaster = new Ride("Roller Coaster", 20, operator);
+        Ride rollerCoaster = new Ride("Roller Coaster", 20, operator,1);
 
         // Create Visitor objects
         Visitor v1 = new Visitor("Alice", 25, "V001", "Premium", "2024-12-01");
@@ -76,7 +78,7 @@ public class AssignmentTwo {
     public void partFourB() {
         // Create a new Ride object
         Employee operator = new Employee("John Doe", 30, "E001", "Operator", "9 AM - 5 PM");
-        Ride rollerCoaster = new Ride("Roller Coaster", 20, operator);
+        Ride rollerCoaster = new Ride("Roller Coaster", 20, operator,1);
 
         // Create Visitor objects
         Visitor v1 = new Visitor("Alice", 25, "V001", "Premium", "2024-12-01");
@@ -105,6 +107,29 @@ public class AssignmentTwo {
     }
 
     public void partFive() {
+        // Create a new Ride object
+        Employee operator = new Employee("John Doe", 30, "E001", "Operator", "9 AM - 5 PM");
+        Ride rollerCoaster = new Ride("Roller Coaster", 20, operator, 5);
+
+        // Create Visitor objects
+        for (int i = 1; i <= 10; i++) {
+            Visitor visitor = new Visitor("Visitor " + i, 20 + i, "V00" + i, "Standard", "2024-12-01");
+            rollerCoaster.addVisitorToQueue(visitor);
+        }
+
+        // Print the queue before running a cycle
+        System.out.println("\nQueue before running the ride cycle:");
+        rollerCoaster.printQueue();
+
+        // Run one cycle
+        rollerCoaster.runOneCycle();
+
+        // Print the queue and ride history after the cycle
+        System.out.println("\nQueue after running the ride cycle:");
+        rollerCoaster.printQueue();
+
+        System.out.println("\nRide history after running the ride cycle:");
+        rollerCoaster.printRideHistory();
     }
 
     public void partSix() {
