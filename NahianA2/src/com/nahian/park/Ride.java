@@ -3,7 +3,7 @@ package com.nahian.park;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
-
+import java.util.Collections;
 public class Ride implements RideInterface {
     private String rideName;
     private int capacity;
@@ -106,13 +106,18 @@ public class Ride implements RideInterface {
         return rideHistory.size();
     }
 
+    public void sortRideHistory() {
+        Collections.sort(rideHistory, new VisitorComparator());
+        System.out.println("Ride history sorted by age and name.");
+    }
+
     @Override
     public void printRideHistory() {
         System.out.println("Visitors who took the ride:");
         Iterator<Visitor> iterator = rideHistory.iterator();
         while (iterator.hasNext()) {
             Visitor visitor = iterator.next();
-            System.out.println(" - " + visitor.getName());
+            System.out.println(" - " + visitor.getName() + " (Age: " + visitor.getAge() + ")");
         }
     }
 }
