@@ -11,6 +11,8 @@ public class AssignmentTwo {
         assignment.partFive();
         System.out.println("\nPart 6:");
         assignment.partSix();
+        System.out.println("\nPart 7:");
+        assignment.partSeven();
     }
     public void partThree() {
     	System.out.println("Part 3:");
@@ -159,5 +161,20 @@ public class AssignmentTwo {
     }
 
     public void partSeven() {
+        // Create a new Ride object
+        Employee operator = new Employee("John Doe", 30, "E001", "Operator", "9 AM - 5 PM");
+        Ride rollerCoaster = new Ride("Roller Coaster", 20, operator, 5);
+
+        // Import the ride history from a file
+        String fileName = "ride_history.csv";
+        rollerCoaster.importRideHistory(fileName);
+
+        // Print the number of visitors in the ride history
+        System.out.println("\nNumber of visitors in the ride history:");
+        System.out.println(rollerCoaster.numberOfVisitors());
+
+        // Print all visitors in the ride history
+        System.out.println("\nVisitors in the ride history:");
+        rollerCoaster.printRideHistory();
     }
 }

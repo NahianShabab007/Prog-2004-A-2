@@ -1,5 +1,7 @@
 package com.nahian.park;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -164,6 +166,29 @@ public class Ride implements RideInterface {
             System.out.println("Ride history exported successfully to " + fileName);
         } catch (IOException e) {
             System.err.println("An error occurred while exporting the ride history: " + e.getMessage());
+        }
+    }
+    public void importRideHistory(String fileName) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] details = line.split(",");
+                if (details.length == 5) {
+                    String name = details[0];
+                    int age = Integer.parseInt(details[1]);
+                    String id = details[2];
+                    String membershipType = details[3];
+                    String visitDate = details[4];
+
+                    Visitor visitor = new Visitor(name, age, id, membershipType, visitDate);
+                    rideHistory.add(visitor);
+                } else {
+                    System.err.println("Invalid data format: " + line);
+                }
+            }
+            System.out.println("Ride history imported successfully from " + fileName);
+        } catch (IOException e) {
+            System.err.println("An error occurred while importing the ride history: " + e.getMessage());
         }
     }
 
