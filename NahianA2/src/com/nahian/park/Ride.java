@@ -1,5 +1,8 @@
 package com.nahian.park;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -146,6 +149,22 @@ public class Ride implements RideInterface {
     public void sortRideHistory() {
         Collections.sort(rideHistory, new VisitorComparator());
         System.out.println("Ride history sorted by age and name.");
+    }
+    public void exportRideHistory(String fileName) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            for (Visitor visitor : rideHistory) {
+                String visitorData = visitor.getName() + "," +
+                                     visitor.getAge() + "," +
+                                     visitor.getId() + "," +
+                                     visitor.getMembershipType() + "," +
+                                     visitor.getVisitDate();
+                writer.write(visitorData);
+                writer.newLine();
+            }
+            System.out.println("Ride history exported successfully to " + fileName);
+        } catch (IOException e) {
+            System.err.println("An error occurred while exporting the ride history: " + e.getMessage());
+        }
     }
 
     @Override
